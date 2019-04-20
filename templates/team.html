@@ -1,0 +1,121 @@
+{{/*###
+Handler=/team
+TitleBar=Team
+Include=user_group.html
+KyutGrill=team2.jpg
+*/}}
+{{ define "tpl" }}
+<div class="ui container">
+	<div class="ui segments">
+		<div class="ui center aligned segment">
+			<h3>{{ .T "This is a list of the wonderful people who keep Atoka up and running and deal with its community." }}</h3>
+		</div>
+		<div class="ui center aligned segment">
+			<h1 class="ui heading">{{ .T "Founders" }}</h1>
+			<p>
+				{{ .T "This server only exists thanks to these two, not sure what they do, but they're here. They have a light blue name in the in-game chat." }}
+			</p>
+			{{ template "userGroup" (.Get "badges/members?id=%d" 3) }}
+		</div>
+		<div class="ui center aligned segment">
+			<h1 class="ui heading">{{ .T "Administrators" }}</h1>
+			<p>
+				{{ .T "Administrators take care of the community, they also deal with bans, silences, name changes and pretty much everything that has to do with the community." }}<br>
+				{{ .T "They take care of our Discord server and reply to emails sent to the support services. Administrators have a red name in the in-game chat." | html }}
+			</p>
+			{{ template "userGroup" (.Get "badges/members?id=%d" 6) }}
+		</div>
+		<div class="ui center aligned segment">
+			<h1 class="ui heading">{{ .T "Developers" }}</h1>
+			<p>
+				{{ .T "Developers add new features to the server, squash bugs, keep the server up and running and take care of its maintenance." }}<br>
+				{{ .T "They don't do anything related to the community. Developers have a blue name in the in-game chat." }}
+			</p>
+			{{ template "userGroup" (.Get "badges/members?id=%d" 3) }}
+			{{ template "userGroup" (.Get "badges/members?id=%d" 14) }}
+		</div>
+		<div class="ui center aligned segment">
+			<h1 class="ui heading">{{ .T "Moderators" }}</h1>
+			<p>
+				{{ .T "Chat moderators manage the chat to make sure The Law&trade; (the rules) is respected." | html }}
+			</p>
+			{{ template "userGroup" (.Get "badges/members?id=%d" 7) }}
+		</div>
+		<div class="ui center aligned segment">
+			<h1 class="ui heading">{{ .T "BATs" }}</h1>
+			<p>
+				{{ .T "BATs play beatmaps in the ranking queue and decide whether they are good enough to be ranked or not." }}
+			</p>
+			{{ template "userGroup" (.Get "badges/members?id=%d" 8) }}
+		</div>
+	</div>
+	<div class="ui segments">
+		<div class="ui center aligned segment">
+			<h1 class="ui heading">{{ .T "Special thanks" }}</h1>
+			<p>{{ .T "Here's a list of people who helped with Atoka." }}</p>
+		</div>
+		<div class="ui segment">
+			<ul class="ui list">
+				<li>
+					{{ .T "<b>Justin | Enjuu!</b>, for helping out with well, basically everything! This guy is literally a god." | html }}
+				</li>
+				<li>
+					{{ .T "<b>r33int</b>, for the intial help with compiling Hanayo!" | html }}
+				</li>
+				<li>{{ .T "<b>Phil</b>, for hosting Atoka on his server." | html }}</li>
+				<li>
+					{{ .T "<b>Franc[e]sco/lolisamurai</b>, for <a href='https://github.com/Francesco149/oppai' target='_blank'>oppai</a>, used as standard pp calculator." | html }}<br>
+					oppai is licensed under GPL v3. Our implementation can be found <a href="https://zxq.co/ripple/lets/src/master/pp/rippoppai.py" target="_blank">here</a>.
+				</li>
+				<li>
+					{{ .T "<b>Tom94</b>, for <a href='https://github.com/ppy/osu-performance' target='_blank'>osu-performance</a>, used as a reference for our mania pp calculator." | html }}<br>
+					osu-performance is licensed under AGPL v3. Our implementation can be found <a href="https://zxq.co/ripple/lets/src/master/pp/wifipiano3.py" target="_blank">here</a>.
+				</li>
+				<li>
+					{{ .T "<b>Sunpy</b>, for <a href='https://github.com/osufx/catch-the-pp' target='_blank'>catch-the-pp</a>, used as catch the beat pp calculator." | html }}<br>
+					catch-the-pp is licensed under GPL v3. Our implementation can be found <a href="https://github.com/osuripple/catch-the-pp" target="_blank">here</a>.
+				</li>
+				<li>
+					{{ .T "<b>jrosdahl</b>, for <a href='https://github.com/jrosdahl/miniircd' target='_blank'>miniircd</a>, used as a base for our IRC server." | html }}<br>
+					miniircd is licensed under GPL v2. Our implementation can be found <a href="https://zxq.co/ripple/pep.py/src/master/irc/ircserver.py">here</a>.
+				</li>
+				<li>{{ .T "<b>Flame</b> for the Clans System." | html }}</li>
+				<li>{{ .T "<b><a href='https://ripple.moe/' target='_blank'>osu!Ripple</a></b> for the source code <b>osu!Atoka</b> runs on. The original source code can be found <a href='https://github.com/osuripple' target='_blank'>here</a>." | html }}</li>
+				<li>{{ .T "<b><a href='https://akatsuki.pw/' target='_blank'>osu!Akatsuki</a></b> for our Discord Bot, Mirai. The original source can be found <a href='https://github.com/osuakatsuki/aika' target='_blank'>here</a>." | html }}</li>
+				<li>{{ .T "<b><a href='https://osu.gatari.pw/' target='_blank'>osu!gatari</a></b> and <b><a href='https://github.com/ppy/osu-web' target='_blank'>osu-web</a></b> for some of our website elements." | html }}</li>
+				<li>{{ .T "<b><a href='https://awasu.xyz/' target='_blank'>osu!Awasu</a></b> for our Beatmap Listing page." | html }}</li>
+				<li>{{ .T "<b>Everyone</b> who has supported the Atoka and Ripple projects by donating or inviting other people." | html }}</li>
+			</ul>
+		</div>
+	</div>
+	{{ $ := . }}
+	{{ .T "Looking for how you should contact our team? Check out <a href='https://discord.gg/abJ9TU8'>our discord</a>." | html }}
+	<div class="ui modal">
+		<div class="header"><h2 class="ui header">{{ .T "They told me these are very cool people." }}</h2></div>
+		{{ with .Get "users?sort=donor_expire,desc&l=52" }}
+			<div class="content">
+				<div class="ui four column grid">
+					{{ range .users }}
+						<div class="column">
+							<h4 class="ui image header">
+								<img src="{{ config "AvatarURL" }}/{{ .id }}" class="ui micro rounded image">
+								<div class="content">
+									<a href="/u/{{ .id }}">{{ .username }}</a>
+								</div>
+							</h4>
+						</div>
+					{{ end }}
+				</div>
+				<!-- Probably most shit coded part of Hanayo -->
+				<br>
+				<div class="centered">
+					<b>{{ $.T "And more..." }}</b><br><br>
+					<b>{{ $.T "Do you want to be in this list?" }}</b><br>
+					<a href="/donate"><b>{{ $.T "Support us with a donation!" }}</b></a><br>
+					<i>{{ $.T "(You get other cool perks too)" }}</i>
+				</div>
+			</div>
+		{{ end }}
+	</div>
+</div>
+{{ end }}
