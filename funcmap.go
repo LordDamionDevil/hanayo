@@ -160,6 +160,49 @@ var funcMap = template.FuncMap{
 	"humanize": func(f float64) string {
 		return humanize.Commaf(f)
 	},
+	// playtime makes playtime sexy.
+	"playtime": func(f float64) string {
+		/*
+		minutes = playtime in minutes
+		hours = playtime in hours
+		days = playtime in days
+		years = playtime in years
+		r = the returned value calculated from seconds => formatted time.
+		*/
+
+		// Variables
+		var minutes float64
+		var hours float64
+		var days float64
+		var years float64
+		var r string
+
+		// Calculations
+		minutes = f/60
+		hours = minutes/60
+		days = hours/24
+		years = days/365
+
+		// Display
+		if f < 1 { // No playtime
+			r = fmt.Sprintf(`None`)
+		} else if f < 60 { // Seconds
+			r = fmt.Sprintf(`%s second(s)`, humanize.Commaf(math.Round(f)))
+		}
+		if f >= 60 { // Minutes
+			r = fmt.Sprintf(`%s minute(s)`, humanize.Commaf(math.Round(minutes)))
+		}
+		if f >= 3600 { // Hours
+			r = fmt.Sprintf(`%s hour(s)`, humanize.Commaf(math.Round(hours)))
+		}
+		if f >= 86400 { // Days
+			r = fmt.Sprintf(`%s day(s)`, humanize.Commaf(math.Round(days)))
+		}
+		if f >= 31536000 { // Years
+			r = fmt.Sprintf(`%s year(s)`, humanize.Commaf(math.Round(years)))
+		}
+		return r
+	},
 	// levelPercent basically does this:
 	//     levelPercent(56.23215) == "23"
 	"levelPercent": func(l float64) string {

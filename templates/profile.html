@@ -47,10 +47,10 @@ Include=user_group.html
 			
 			{{/* Use these instead. Much more reliable. */}}
 			{{ $god      := has .privileges 3145727 }}
-			{{ $admin    := has .privileges 3063291 }}
+			{{ $admin    := has .privileges 3079679 }}
 			{{ $bots     := has .privileges 1048575 }}
-			{{ $dev      := has .privileges 1043995 }}
 			{{ $chatmod  := has .privileges 2916575 }}
+			{{ $donor    := has .privileges 7 }}
 			{{ $bat      := has .privileges 271 }}
 
 			{{ if hasAdmin $global.Context.User.Privileges }}
@@ -71,8 +71,6 @@ Include=user_group.html
 					<div class="ui warning centered message">{{ $global.T "User is <b>%s</b>" "Staff" | html }}.</div>
 				{{ else if $bots }}
 					<div class="ui warning centered message">{{ $global.T "This is a <b>Bot</b> Account" | html }}.</div>
-				{{ else if $dev }}
-					<div class="ui warning centered message">{{ $global.T "User is <b>%s</b>" "Staff" | html }}.</div>
 				{{ else if $admin }}
 					<div class="ui warning centered message">{{ $global.T "User is <b>%s</b>" "Staff" | html }}.</div>				
 				{{ else if $chatmod }}
@@ -106,10 +104,6 @@ Include=user_group.html
 						<h1 class="ui header">
                     	{{ if $god }}
                     		<div class="owner">
-                        		<a href="/c/{{ .clan.id }}?mode=0">{{ .clan.tag }} </a> {{ .username }}
-                    		</div>
-                    	{{else if $dev}}
-                    		<div class="dev">
                         		<a href="/c/{{ .clan.id }}?mode=0">{{ .clan.tag }} </a> {{ .username }}
                     		</div>
                     	{{ else }}
@@ -174,11 +168,6 @@ Include=user_group.html
                                                                                                                         {{ $global.T "<b>%s</b> " .username | html }}
                                 is a <i class="grey cogs small icon"></i><b>Bot</b>
                                 {{ $global.T " from <b>%s</b>." "Atokaland" | html }}
-
-							{{ else if $dev }}
-															{{ $global.T "<b>%s</b> " .username | html }}
-							is a <i class="green code small icon"></i><b>Developer</b>
-                    		{{ $global.T " from <b>%s</b>." (country .country true) | html }}
 							{{ else if $admin }}
 															{{ $global.T "<b>%s</b> " .username | html }}
                     		is an <i class="yellow lightning small icon"></i><b>Administrator</b>
@@ -187,6 +176,11 @@ Include=user_group.html
 															{{ $global.T "<b>%s</b> " .username | html }}
                     		is a <i class="purple star small icon"></i><b>Moderator</b>
                     		{{ $global.T " from <b>%s</b>." (country .country true) | html }}
+                                                        {{ else if $donor }}
+                                                                                                                        {{ $global.T "<b>%s</b> " .username | html }}
+                                is a <i class="yellow heart small icon"></i><b>Donator</b>
+                                {{ $global.T " from <b>%s</b>." (country .country true) | html }}
+
 							{{ else if $bat }}
 															{{ $global.T "<b>%s</b> " .username | html }}
                     		is a <i class="orange music small icon"></i><b>BAT</b>
@@ -269,6 +263,11 @@ Include=user_group.html
 												<td class="right aligned">{{ humanize .playcount }}</td>
 											</tr>
 											<tr>
+												<td><b>{{ $global.T "Playtime" }}</b></td>
+												<td class="right aligned">{{ playtime .playtime }}</td>
+											</tr>
+											<tr>
+				
 												<td><b>{{ $global.T "Replays watched" }}</b></td>
 												<td class="right aligned">{{ humanize .replays_watched }}</td>
 											</tr>
