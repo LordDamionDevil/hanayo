@@ -171,35 +171,50 @@ var funcMap = template.FuncMap{
 		*/
 
 		// Variables
-		var minutes float64
-		var hours float64
-		var days float64
-		var years float64
-		var r string
+		var (
+			minutes, hours, days, years float64
+			r string
+		)
 
 		// Calculations
-		minutes = f/60
-		hours = minutes/60
-		days = hours/24
-		years = days/365
+		minutes = math.Round(f/60)
+		hours = math.Round(minutes/60)
+		days = math.Round(hours/24)
+		years = math.Round(days/365)
 
 		// Display
 		if f < 1 { // No playtime
 			r = fmt.Sprintf(`None`)
 		} else if f < 60 { // Seconds
-			r = fmt.Sprintf(`%s second(s)`, humanize.Commaf(math.Round(f)))
+			r = fmt.Sprintf(`%s seconds`, humanize.Commaf(math.Round(f)))
 		}
 		if f >= 60 { // Minutes
-			r = fmt.Sprintf(`%s minute(s)`, humanize.Commaf(math.Round(minutes)))
+			if minutes > 1 {
+				r = fmt.Sprintf(`%s minutes`, humanize.Commaf(minutes))
+			} else {
+				r = fmt.Sprintf(`%s minute`, humanize.Commaf(minutes))
+			}
 		}
 		if f >= 3600 { // Hours
-			r = fmt.Sprintf(`%s hour(s)`, humanize.Commaf(math.Round(hours)))
+			if hours > 1 {
+				r = fmt.Sprintf(`%s hours`, humanize.Commaf(hours))
+			} else {
+				r = fmt.Sprintf(`%s hour`, humanize.Commaf(hours))
+			}
 		}
 		if f >= 86400 { // Days
-			r = fmt.Sprintf(`%s day(s)`, humanize.Commaf(math.Round(days)))
+			if days > 1 {
+				r = fmt.Sprintf(`%s days (%s hours)`, humanize.Commaf(days), humanize.Commaf(hours))
+			} else {
+				r = fmt.Sprintf(`%s day (%s hours)`, humanize.Commaf(days), humanize.Commaf(hours))
+			}
 		}
 		if f >= 31536000 { // Years
-			r = fmt.Sprintf(`%s year(s)`, humanize.Commaf(math.Round(years)))
+			if years > 1 {
+				r = fmt.Sprintf(`%s years (%s hours)`, humanize.Commaf(years), humanize.Commaf(hours))
+			} else {
+				r = fmt.Sprintf(`%s year (%s hours)`, humanize.Commaf(years), humanize.Commaf(hours))
+			}
 		}
 		return r
 	},
